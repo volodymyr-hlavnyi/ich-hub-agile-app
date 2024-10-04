@@ -1,13 +1,11 @@
+# apps/project/models/projectfile.py
+
 from django.db import models
 
-
 class ProjectFile(models.Model):
-    file_name = models.CharField(max_length=120)
-    file_path = models.FileField(upload_to="documents/")
-    created_at = models.DateField(auto_now_add=True)
+    objects = models.Manager()
+    file = models.FileField(upload_to='project_files/')
+    project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='project_files')
 
     def __str__(self):
-        return self.file_name
-
-    class Meta:
-        ordering = ["created_at"]
+        return self.file.name

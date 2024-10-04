@@ -1,14 +1,18 @@
-from apps.project import models
+# apps/project/models/project.py
+
+from django.db import models
+from apps.project.models.projectfile import ProjectFile
 
 class Project(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    objects = models.Manager()
+    name = models.CharField(max_length=255)
     description = models.TextField()
+    files = models.ManyToManyField(ProjectFile, related_name='projects')
     created_at = models.DateTimeField(auto_now_add=True)
-    file = models.ManyToManyField("ProjectFile", related_name="project")
 
     @property
     def count_of_files(self):
-        return self.file.count()
+        return self.files.count()
 
     def __str__(self):
         return self.name
