@@ -34,6 +34,11 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 LOCAL_APPS = [
     'apps.tasks.apps.TasksConfig',
     'apps.project.apps.ProjectConfig',
+
+]
+
+THIRD_PARTY_APPS = [
+    'rest_framework'
 ]
 
 BASE_APPS = [
@@ -46,7 +51,7 @@ BASE_APPS = [
 
 ]
 
-INSTALLED_APPS = BASE_APPS + LOCAL_APPS
+INSTALLED_APPS = BASE_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
